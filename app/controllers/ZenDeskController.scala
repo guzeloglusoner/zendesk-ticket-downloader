@@ -47,10 +47,11 @@ class ZenDeskController @Inject()(ws: WSClient,
         .url(cursor)
         .addHttpHeaders(("Authorization", s"Bearer $token"))
         .get()
+
     }
 
     // get the latest cursor url
-    val readCache = Flow[Unit].mapAsync(100)(_ => {
+    val readCache = Flow[Unit].mapAsync(1)(_ => {
       val currentCache = cache.get[String]("cursorUrl")
       println(s"Read cache is: $currentCache")
       currentCache
@@ -88,7 +89,7 @@ class ZenDeskController @Inject()(ws: WSClient,
         cache.set("cursorUrl", value.after_url)
 
         Source
-          .tick(0 second, 15 second, ())
+          .tick(0 second, 6 second, ())
           .via(readCache)
           .via(getZendeskTickets)
           .via(toZendeskTicketsStream)
