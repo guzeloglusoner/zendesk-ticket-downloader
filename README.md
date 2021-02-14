@@ -1,4 +1,4 @@
-# Zendesk Ticket Download
+# Zendesk Ticket Downloader
 
 The aim of the project is to stream ZenDesk Tickets in real-time with cursor based pagination.
 

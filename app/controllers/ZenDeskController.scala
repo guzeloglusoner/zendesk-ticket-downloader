@@ -98,6 +98,6 @@ class ZenDeskController @Inject()(ws: WSClient,
           .runWith(Sink.ignore)
     }
 
-    Ok("Selamun Aleykum")
+    Ok("Stream is started, please observer console logs.")
   }
 }
