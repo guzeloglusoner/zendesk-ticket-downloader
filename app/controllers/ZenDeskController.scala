@@ -94,7 +94,6 @@ class ZenDeskController @Inject()(ws: WSClient,
           .via(getZendeskTickets)
           .via(toZendeskTicketsStream)
           .via(printTickets)
-          .intersperse()
           .via(setCache)
           .runWith(Sink.ignore)
     }
