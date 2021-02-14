@@ -30,7 +30,6 @@ class ZenDeskController @Inject()(ws: WSClient,
   // The materializer makes actors execute graphs
   implicit val materializer = ActorMaterializer()
 
-
   // Reading Config
   private val zendeskCursorBasedInitialURL = conf.get[String]("zendeskCursorBasedInitial.url")
   private val token = conf.get[String]("zendeskAccess.token")
@@ -78,7 +77,7 @@ class ZenDeskController @Inject()(ws: WSClient,
 
     val lastZendeskTicketsStream: Future[ZendeskTicketsStream] =
       Source
-        .fromFuture(initialResponse)
+        .future(initialResponse)
         .via(toZendeskTicketsStream)
         .runWith(Sink.last)
 
